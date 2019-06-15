@@ -1,5 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { logout } from "../../../../actions/auth";
+import { getEmployees } from "../../../../actions/employees";
 import {
   Dropdown,
   DropdownToggle,
@@ -10,7 +14,7 @@ import {
   NavLink
 } from "shards-react";
 
-export default class UserActions extends React.Component {
+export class UserActions extends React.Component {
   constructor(props) {
     super(props);
 
@@ -27,36 +31,49 @@ export default class UserActions extends React.Component {
     });
   }
 
+  componentDidMount() {
+    this.props.getEmployees();
+  };
+
+  static propTypes = {
+    auth: PropTypes.object.isRequired,
+    logout: PropTypes.func.isRequired
+  };
+
   render() {
+    const { isAuthenticated, user } = this.props.auth;
+    var employee = {};
+    this.props.employees ? employee = this.props.employees.filter(employee => employee.user === user.id) : "";
+
     return (
       <NavItem tag={Dropdown} caret toggle={this.toggleUserActions}>
-        <DropdownToggle caret tag={NavLink} className="text-nowrap px-3">
-          <img
-            className="user-avatar rounded-circle mr-2"
-            src={require("./../../../../images/avatars/5.jpg")}
-            alt="User Avatar"
-          />{" "}
-          <span className="d-none d-md-inline-block">Администратор</span>
+        <DropdownToggle caret tag={NavLink} className="text-nowrap px-3 mt-2">
+          <span className="d-none d-md-inline-block">{user ? `${user.username}` : ""}</span>
         </DropdownToggle>
         <Collapse tag={DropdownMenu} right small open={this.state.visible}>
-          <DropdownItem tag={Link} to="user-profile">
-            <i className="material-icons">&#xE7FD;</i> Profile
-          </DropdownItem>
-          <DropdownItem tag={Link} to="edit-user-profile">
-            <i className="material-icons">&#xE8B8;</i> Edit Profile
-          </DropdownItem>
-          <DropdownItem tag={Link} to="file-manager-list">
-            <i className="material-icons">&#xE2C7;</i> Files
-          </DropdownItem>
-          <DropdownItem tag={Link} to="transaction-history">
-            <i className="material-icons">&#xE896;</i> Transactions
+          <DropdownItem>
+            {employee.length > 0 ? <Link to={`/employee/${employee[0].emp_no}`}>Профиль</Link> : ""}
           </DropdownItem>
           <DropdownItem divider />
-          <DropdownItem tag={Link} to="/" className="text-danger">
-            <i className="material-icons text-danger">&#xE879;</i> Logout
+          <DropdownItem className="text-danger">
+            <button className="btn btn-danger btn-sm"
+              onClick={this.props.logout}
+            >
+              Выйти
+            </button>
           </DropdownItem>
         </Collapse>
       </NavItem>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  employees: state.employees.employees,
+});
+
+export default connect(
+  mapStateToProps,
+  { logout, getEmployees }
+)(UserActions);

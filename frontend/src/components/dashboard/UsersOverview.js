@@ -93,19 +93,6 @@ class UsersOverview extends React.Component {
           <h6 className="m-0">{title}</h6>
         </CardHeader>
         <CardBody className="pt-0">
-          <Row className="border-bottom py-2 bg-light">
-            <Col sm="6" className="d-flex mb-2 mb-sm-0">
-              <RangeDatePicker />
-            </Col>
-            <Col>
-              <Button
-                size="sm"
-                className="d-flex btn-white ml-auto mr-auto ml-sm-auto mr-sm-0 mt-3 mt-sm-0"
-              >
-                View Full Report &rarr;
-              </Button>
-            </Col>
-          </Row>
           <canvas
             height="120"
             ref={this.canvasRef}
@@ -139,7 +126,7 @@ UsersOverview.defaultProps = {
     labels: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
     datasets: [
       {
-        label: "Текущий месяц",
+        label: "Текущий год",
         fill: "start",
         data: [
           50,
@@ -164,7 +151,7 @@ UsersOverview.defaultProps = {
         pointHoverRadius: 3
       },
       {
-        label: "Прошлый месяц",
+        label: "Прошлый год",
         fill: "start",
         data: [
           38,

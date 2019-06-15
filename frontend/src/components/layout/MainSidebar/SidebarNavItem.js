@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import { NavLink as RouteNavLink } from "react-router-dom";
 import { NavItem, NavLink } from "shards-react";
 
-const SidebarNavItem = ({ item }) => (
+const SidebarNavItem = ({ item }) => {
+  return (
   <NavItem>
     <NavLink tag={RouteNavLink} to={item.to}>
       {item.htmlBefore && (
@@ -22,6 +23,7 @@ const SidebarNavItem = ({ item }) => (
     </NavLink>
   </NavItem>
 );
+}
 
 SidebarNavItem.propTypes = {
   /**

@@ -8,28 +8,37 @@ import UsersOverview from "./../components/dashboard/UsersOverview";
 import NewDraft from "./../components/dashboard/NewDraft";
 import Discussions from "./../components/dashboard/Discussions";
 import TopReferrals from "./../components/common/TopReferrals";
+import EmployeesCounter from "../components/employees/EmployeesCounter";
+import DepartmentsCounter from "../components/departments/DepartmentsCounter";
+import LessonsCounter from "../components/lessons/LessonsCounter";
+import UsersCounter from "../components/users/UsersCounter";
+import GroupsCounter from "../components/groups/GroupsCounter";
+import CoursesCounter from "../components/courses/CoursesCounter";
 
-const MainDashboard = ({ smallStats }) => (
+const MainDashboard = () => (
   <Container fluid className="main-content-container px-4">
     {/* Page Header */}
     <Row noGutters className="page-header py-4">
       <PageTitle title="Общая статистика" subtitle="Главная" className="text-sm-left mb-3" />
     </Row>
 
-    {/* Small Stats Blocks */}
+    {/* Counter */}
     <Row>
-      {smallStats.map((stats, idx) => (
-        <Col className="col-lg mb-4" key={idx} {...stats.attrs}>
-          <SmallStats
-            id={`small-stats-${idx}`}
-            variation="1"
-            chartData={stats.datasets}
-            chartLabels={stats.chartLabels}
-            label={stats.label}
-            value={stats.value}
-          />
-        </Col>
-      ))}
+      <Col className="col-lg mb-2 col-sm-6">
+        <EmployeesCounter/>
+      </Col>
+      <Col className="col-lg mb-2 col-sm-6">
+        <DepartmentsCounter/>
+      </Col>
+      <Col className="col-lg mb-2 col-sm-6">
+        <LessonsCounter/>
+      </Col>
+      <Col className="col-lg mb-2 col-sm-6">
+        <CoursesCounter/>
+      </Col>
+      <Col className="col-lg mb-2 col-sm-6">
+        <GroupsCounter/>
+      </Col>
     </Row>
 
     <Row>
@@ -38,20 +47,20 @@ const MainDashboard = ({ smallStats }) => (
         <UsersOverview />
       </Col>
 
-      {/* New Draft */}
-      <Col lg="4" md="6" sm="12" className="mb-4">
-        <NewDraft />
-      </Col>
+      {/*/!* New Draft *!/*/}
+      {/*<Col lg="4" md="6" sm="12" className="mb-4">*/}
+      {/*  <NewDraft />*/}
+      {/*</Col>*/}
 
-      {/* Discussions */}
-      <Col lg="5" md="12" sm="12" className="mb-4">
-        <Discussions />
-      </Col>
+      {/*/!* Discussions *!/*/}
+      {/*<Col lg="5" md="12" sm="12" className="mb-4">*/}
+      {/*  <Discussions />*/}
+      {/*</Col>*/}
 
-      {/* Top Referrals */}
-      <Col lg="3" md="12" sm="12" className="mb-4">
-        <TopReferrals />
-      </Col>
+      {/*/!* Top Referrals *!/*/}
+      {/*<Col lg="3" md="12" sm="12" className="mb-4">*/}
+      {/*  <TopReferrals />*/}
+      {/*</Col>*/}
     </Row>
   </Container>
 );
@@ -63,91 +72,5 @@ MainDashboard.propTypes = {
   smallStats: PropTypes.array
 };
 
-MainDashboard.defaultProps = {
-  smallStats: [
-    {
-      label: "Сотрудников",
-      value: "321",
-      percentage: "2",
-      increase: true,
-      chartLabels: [null, null, null, null, null, null, null],
-      attrs: { md: "6", sm: "6" },
-      datasets: [
-        {
-          label: "Today",
-          fill: "start",
-          borderWidth: 1.5,
-          backgroundColor: "rgba(0, 184, 216, 0.1)",
-          borderColor: "rgb(0, 184, 216)",
-          data: [1, 2, 1, 3, 5, 4, 7]
-        }
-      ]
-    },
-    {
-      label: "Курсов",
-      value: "18",
-      chartLabels: [null, null, null, null, null, null, null],
-      attrs: { md: "6", sm: "6" },
-      datasets: [
-        {
-          label: "Today",
-          fill: "start",
-          borderWidth: 1.5,
-          backgroundColor: "rgba(23,198,113,0.1)",
-          borderColor: "rgb(23,198,113)",
-          data: [1, 2, 3, 3, 3, 4, 4]
-        }
-      ]
-    },
-    {
-      label: "Отделов",
-      value: "24",
-      chartLabels: [null, null, null, null, null, null, null],
-      attrs: { md: "4", sm: "6" },
-      datasets: [
-        {
-          label: "Today",
-          fill: "start",
-          borderWidth: 1.5,
-          backgroundColor: "rgba(255,180,0,0.1)",
-          borderColor: "rgb(255,180,0)",
-          data: [2, 3, 3, 3, 4, 3, 3]
-        }
-      ]
-    },
-    {
-      label: "New Customers",
-      value: "29",
-      chartLabels: [null, null, null, null, null, null, null],
-      attrs: { md: "4", sm: "6" },
-      datasets: [
-        {
-          label: "Today",
-          fill: "start",
-          borderWidth: 1.5,
-          backgroundColor: "rgba(255,65,105,0.1)",
-          borderColor: "rgb(255,65,105)",
-          data: [1, 7, 1, 3, 1, 4, 8]
-        }
-      ]
-    },
-    {
-      label: "Subscribers",
-      value: "17,281",
-      chartLabels: [null, null, null, null, null, null, null],
-      attrs: { md: "4", sm: "6" },
-      datasets: [
-        {
-          label: "Today",
-          fill: "start",
-          borderWidth: 1.5,
-          backgroundColor: "rgb(0,123,255,0.1)",
-          borderColor: "rgb(0,123,255)",
-          data: [3, 2, 3, 2, 4, 5, 4]
-        }
-      ]
-    }
-  ]
-};
 
 export default MainDashboard;

@@ -11,7 +11,7 @@ class DepartmentAdmin(admin.ModelAdmin):
 
 @admin.register(models.DeptEmp)
 class DeptEmpAdmin(admin.ModelAdmin):
-    list_display = ('employee', 'department', 'from_date', 'to_date')
+    list_display = ('employee', 'department')
     list_select_related = True
     raw_id_fields = ('employee', )
     list_filter = ('department', )
@@ -19,14 +19,14 @@ class DeptEmpAdmin(admin.ModelAdmin):
 
 @admin.register(models.DeptManager)
 class DeptManagerAdmin(admin.ModelAdmin):
-    list_display = ('employee', 'department', 'from_date', 'to_date')
+    list_display = ('employee', 'department')
     raw_id_fields = ('employee', )
     list_filter = ('department', )
 
 
 @admin.register(models.Employee)
 class EmployeeAdmin(admin.ModelAdmin):
-    list_display = ('emp_no', 'first_name', 'last_name', 'hire_date')
+    list_display = ('emp_no', 'first_name', 'last_name',  'middle_name', 'gender', 'birth_date', 'hire_date', 'department', 'user')
 
 
 @admin.register(models.Salary)
@@ -40,3 +40,6 @@ class TitleAdmin(admin.ModelAdmin):
     list_display = ('employee', 'from_date', 'to_date', 'title')
     raw_id_fields = ('employee', )
     list_filter = ('title', )
+
+admin.site.register(models.Lesson)
+admin.site.register(models.Cours)

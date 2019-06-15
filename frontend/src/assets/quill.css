@@ -2,3 +2,7 @@
 .add-new-post__editor .ql-editor {
   min-height: 400px;
 }
+
+.top-view {
+  z-index: 9999;
+}
